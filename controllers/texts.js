@@ -2,12 +2,31 @@ const Texts = require('../models/texts');
 
 //Text
 const getAllTexts = (req, res) => {
-    Texts.find({}, (err, data) => {
-        if (err) {
-            return res.json({ Error: err })
-        }
-        return res.json(data)
-    })
+    //Filter
+    if (req.query.language) {
+        Texts.find({ language: req.query.language }, (err, data) => {
+            if (err) {
+                return res.json({ Error: err })
+            }
+            return res.json(data)
+        });
+    } else if (req.query.categoryname) {
+        Texts.find({ categoryname: req.query.categoryname }, (err, data) => {
+            if (err) {
+                return res.json({ Error: err })
+            }
+            return res.json(data)
+        });
+    }
+    //get All
+    else {
+        Texts.find({}, (err, data) => {
+            if (err) {
+                return res.json({ Error: err })
+            }
+            return res.json(data)
+        })
+    }
 }
 
 const getOneText = (req, res) => {

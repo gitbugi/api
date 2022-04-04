@@ -10,7 +10,7 @@ router.get('/texts/:title/vocabels', textsController.getOneVocabels);
 router.patch('/texts/:title/vocabels', upload.none(), textsController.patchVocabel);
 
 //Text
-router.get('/texts', textsController.getAllTexts);
+router.get('/texts', textsController.getAllTexts); //+ filtern
 
 router.get('/texts/:title', textsController.getOneText);
 router.post('/texts', upload.none(), textsController.newText);
