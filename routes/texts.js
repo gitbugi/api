@@ -3,19 +3,20 @@ const multer = require('multer');
 const router = express.Router();
 const upload = multer();
 const textsController = require('../controllers/texts');
+const auth = require("../middleware/auth");
 
 //Vocabels
-router.get('/texts/vocabels', textsController.getAllVocabels);
-router.get('/texts/:title/vocabels', textsController.getOneVocabels);
-router.patch('/texts/:title/vocabels', upload.none(), textsController.patchVocabel);
+router.get('/texts/vocabels', auth, textsController.getAllVocabels);
+router.get('/texts/:title/vocabels', auth, textsController.getOneVocabels);
+router.patch('/texts/:title/vocabels', auth, upload.none(), textsController.patchVocabel);
 
 //Text
-router.get('/texts', textsController.getAllTexts); //+ filtern
+router.get('/texts', auth, textsController.getAllTexts); //+ filtern
 
-router.get('/texts/:title', textsController.getOneText);
-router.post('/texts', upload.none(), textsController.newText);
-router.delete('/texts/:title', textsController.deleteOneText);
-router.patch('/texts/:title', upload.none(), textsController.patchText);
+router.get('/texts/:title', auth, textsController.getOneText);
+router.post('/texts', auth, upload.none(), textsController.newText);
+router.delete('/texts/:title', auth, textsController.deleteOneText);
+router.patch('/texts/:title', auth, upload.none(), textsController.patchText);
 
 
 

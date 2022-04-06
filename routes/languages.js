@@ -3,8 +3,9 @@ const express = require('express');
 const router = express.Router();
 //const upload = multer();              IST NUR FÜR POST REQUEST
 const languagesController = require('../controllers/languages');
+const auth = require("../middleware/auth");
 
-router.get('/languages', languagesController.getAllLanguages);
+router.get('/languages', auth, languagesController.getAllLanguages);
 
 
 

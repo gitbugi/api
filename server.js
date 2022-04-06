@@ -5,9 +5,14 @@ const app = express();
 const helmet = require('helmet');
 const compression = require('compression');
 
+const userroute = require("./routes/user");
+
+
+
 app.use(express.json());
 app.use(Languageroute);
 app.use(Textroute);
+app.use(userroute);
 app.use(helmet());
 app.use(compression());
 
@@ -33,3 +38,8 @@ mongoose.connect(
         console.log("MongoDB Connection -- Ready state is:", mongoose.connection.readyState);
     }
 );
+
+//////////////////////////////////////////////////////////////////////////////
+function generateAccessToken(username) {
+    return jwt.sign(username, process.env.TOKEN_SECRET, { expiresIn: '1800s' });
+}
