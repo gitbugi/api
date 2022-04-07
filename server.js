@@ -4,10 +4,11 @@ const Textroute = require("./routes/texts");
 const app = express();
 const helmet = require('helmet');
 const compression = require('compression');
+const cors = require('cors');
 
 const userroute = require("./routes/user");
 
-
+app.use(cors({ origin: '*' }))
 
 app.use(express.json());
 app.use(Languageroute);
