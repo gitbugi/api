@@ -48,6 +48,8 @@ const register = async(req, res) => {
 }
 */
 const login = async(req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     // Our login logic starts here
     try {
         // Get user input
