@@ -49,7 +49,10 @@ const newText = (req, res) => {
                 language: req.body.language,
                 title: req.body.title,
                 text: req.body.text,
-                vocabels: { "": "" }
+                vocabels: {},
+                darkyellowvocabels: {},
+                greenvocabels: {},
+                redvocabels: {}
             })
             newText.save((err, data) => {
                 if (err) return res.json({ Error: err });
@@ -97,16 +100,141 @@ const patchText = (req, res) => {
 //Vocabels
 const getAllVocabels = (req, res) => {
     let allVocabels = {};
+    let search = {};
+    //let vocabel = {};
 
-    Texts.find({}, (err, data) => {
-        if (err) {
-            return res.json({ Error: err })
-        }
-        for (let i = 0; i < data.length; i++) {
-            allVocabels = Object.assign(allVocabels, data[i].vocabels);
+    if (req.query.language) {
+        search = {
+            language: req.query.language
         };
-        return res.json(allVocabels);
-    })
+
+        Texts.find(search, (err, data) => {
+            if (err) {
+                return res.json({ Error: err })
+            }
+
+
+            for (i = 0; i < data.length; i++) {
+                //if (req.pathname = '/texts/vocabels') {
+                //    vocabel = data[i].vocabels;
+                //}
+                //if (req.pathname = '/texts/darkyellowvocabels') {
+                //    vocabel = data[i].darkyellowvocabels;
+                //}
+                //if (req.pathname = '/texts/greenvocabels') {
+                //    vocabel = data[i].greenvocabels;
+                //}
+                //if (req.pathname = '/texts/redvocabels') {
+                //    vocabel = data[i].redvocabels;
+                //}
+                allVocabels = Object.assign(allVocabels, data[i].vocabels);
+            };
+            return res.json(allVocabels);
+        })
+    } else {
+        Texts.find({}, (err, data) => {
+            if (err) {
+                return res.json({ Error: err })
+            }
+            for (let i = 0; i < data.length; i++) {
+                allVocabels = Object.assign(allVocabels, data[i].vocabels);
+            };
+            return res.json(allVocabels);
+        })
+    }
+};
+
+const getAlldarkyellowvocabels = (req, res) => {
+    let allVocabels = {};
+    let search = {}
+
+    if (req.query.language) {
+        search = {
+            language: req.query.language
+        };
+
+        Texts.find(search, (err, data) => {
+            if (err) {
+                return res.json({ Error: err })
+            }
+            for (let i = 0; i < data.length; i++) {
+                allVocabels = Object.assign(allVocabels, data[i].darkyellowvocabels);
+            };
+            return res.json(allVocabels);
+        })
+    } else {
+        Texts.find({}, (err, data) => {
+            if (err) {
+                return res.json({ Error: err })
+            }
+            for (let i = 0; i < data.length; i++) {
+                allVocabels = Object.assign(allVocabels, data[i].darkyellowvocabels);
+            };
+            return res.json(allVocabels);
+        })
+    }
+};
+
+const getAllgreenvocabels = (req, res) => {
+    let allVocabels = {};
+    let search = {}
+
+    if (req.query.language) {
+        search = {
+            language: req.query.language
+        };
+
+        Texts.find(search, (err, data) => {
+            if (err) {
+                return res.json({ Error: err })
+            }
+            for (let i = 0; i < data.length; i++) {
+                allVocabels = Object.assign(allVocabels, data[i].greenvocabels);
+            };
+            return res.json(allVocabels);
+        })
+    } else {
+        Texts.find({}, (err, data) => {
+            if (err) {
+                return res.json({ Error: err })
+            }
+            for (let i = 0; i < data.length; i++) {
+                allVocabels = Object.assign(allVocabels, data[i].greenvocabels);
+            };
+            return res.json(allVocabels);
+        })
+    }
+};
+
+const getAllredvocabels = (req, res) => {
+    let allVocabels = {};
+    let search = {}
+
+    if (req.query.language) {
+        search = {
+            language: req.query.language
+        };
+
+        Texts.find(search, (err, data) => {
+            if (err) {
+                return res.json({ Error: err })
+            }
+            for (let i = 0; i < data.length; i++) {
+                allVocabels = Object.assign(allVocabels, data[i].redvocabels);
+            };
+            return res.json(allVocabels);
+        })
+    } else {
+        Texts.find({}, (err, data) => {
+            if (err) {
+                return res.json({ Error: err })
+            }
+            for (let i = 0; i < data.length; i++) {
+                allVocabels = Object.assign(allVocabels, data[i].redvocabels);
+            };
+            return res.json(allVocabels);
+        })
+    }
 };
 
 const getOneVocabels = (req, res) => {
@@ -122,14 +250,8 @@ const getOneVocabels = (req, res) => {
 const patchVocabel = (req, res) => {
     let title = req.params.title;
     let vocabel = req.body;
-    // {
-    //    "vocabels": {
-    //        "one": "one",
-    //        "two": "two"
-    //    }
-    //}
-    //req.body.vocabels;
 
+    //bei vocabel muss vorher { "vocabels": {}} eingegeben werden
     Texts.findOneAndUpdate({ title: title }, vocabel, { return: true }, (err, data) => {
         if (data) {
             return res.json(vocabel);
@@ -149,5 +271,8 @@ module.exports = {
     patchText,
     getAllVocabels,
     getOneVocabels,
-    patchVocabel
+    patchVocabel,
+    getAlldarkyellowvocabels,
+    getAllgreenvocabels,
+    getAllredvocabels
 }
