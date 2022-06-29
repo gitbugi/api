@@ -1,21 +1,22 @@
 const express = require("express");
-const Languageroute = require("./routes/languages");
-const Textroute = require("./routes/texts");
 const app = express();
 const helmet = require('helmet');
 const compression = require('compression');
 const cors = require('cors');
 
+const Languageroute = require("./routes/languages");
+const Textroute = require("./routes/texts");
+const Vocabelsroute = require("./routes/vocabels")
 const userroute = require("./routes/user");
 
 app.use(cors({ origin: '*' }))
-
 app.use(express.json());
+app.use(helmet());
+app.use(compression());
 app.use(Languageroute);
 app.use(Textroute);
 app.use(userroute);
-app.use(helmet());
-app.use(compression());
+app.use(Vocabelsroute);
 
 const listener = app.listen(process.env.PORT || 3000, () => {
     console.log('App is listening on port ' + listener.address().port)

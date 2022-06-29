@@ -2,8 +2,7 @@ const mongoose = require("mongoose"); //import mongoose
 
 const LanguagesSchema = new mongoose.Schema({
     uid: Number,
-    language: String,
-    knownwords: Array,
+    language: String
 });
 
 const Languages = mongoose.model('Languages', LanguagesSchema);
