@@ -5,11 +5,7 @@ const TextsSchema = new mongoose.Schema({
     categoryname: String,
     language: String,
     title: String,
-    text: String,
-    vocabels: { type: Object, default: {} },
-    darkyellowvocabels: { type: Object, default: {} },
-    greenvocabels: { type: Object, default: {} },
-    redvocabels: { type: Object, default: {} }
+    text: String
 }, { minimize: false });
 
 const Texts = mongoose.model('Texts', TextsSchema);
