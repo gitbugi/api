@@ -13,4 +13,7 @@ router.post('/texts', auth, upload.none(), textsController.newText);
 router.delete('/texts/:title', auth, textsController.deleteOneText);
 router.patch('/texts/:title', auth, upload.none(), textsController.patchText);
 
+//Text Number of words, vocabels etc...
+router.patch('/texts/:title/:numberof', upload.none(), textsController.setNumber)
+
 module.exports = router;

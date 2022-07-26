@@ -96,11 +96,36 @@ const patchText = (req, res) => {
     })
 }
 
+// Text Numbers of word, vocabels etc...
+const setNumber = (req, res) => {
+    let title = req.params.title;
+    let numberof = req.params.numberof;
+
+    const newData = {
+        [numberof]: req.body.number
+            //numberofwords: req.body.numberofwords,
+            //yellowvocabels: req.body.yellowvocabels,
+            //darkyellowvocabels: req.body.darkyellowvocabels,
+            //greenvocabels: req.body.greenvocabels,
+            //redvocabels: req.body.redvocabels,
+            //lastrepeatat: req.body.lastrepeatat
+    }
+
+    Texts.findOneAndUpdate({ title: title }, newData, { return: true }, (err, data) => {
+        if (data) {
+            return res.json(newData);
+        } else {
+            return res.json({ Error: err });
+        }
+    })
+
+}
 
 module.exports = {
     getAllTexts,
     newText,
     getOneText,
     deleteOneText,
-    patchText
+    patchText,
+    setNumber
 }
