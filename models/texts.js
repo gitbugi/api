@@ -7,12 +7,12 @@ const TextsSchema = new mongoose.Schema({
     title: String,
     text: String,
     //Text Data
-    numberofwords: Number,
-    yellowvocabels: Number,
-    darkyellowvocabels: Number,
-    greenvocabels: Number,
-    redvocabels: Number,
-    lastrepeatat: Number
+    numberofwords: { type: Number, default: 0 },
+    yellowvocabels: { type: Number, default: 0 },
+    darkyellowvocabels: { type: Number, default: 0 },
+    greenvocabels: { type: Number, default: 0 },
+    redvocabels: { type: Number, default: 0 },
+    lastrepeatat: { type: Number, default: 0 }
 }, { minimize: false });
 
 const Texts = mongoose.model('Texts', TextsSchema);

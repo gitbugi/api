@@ -47,11 +47,7 @@ const newText = (req, res) => {
                 categoryname: req.body.categoryname,
                 language: req.body.language,
                 title: req.body.title,
-                text: req.body.text,
-                vocabels: {},
-                darkyellowvocabels: {},
-                greenvocabels: {},
-                redvocabels: {}
+                text: req.body.text
             })
             newText.save((err, data) => {
                 if (err) return res.json({ Error: err });
