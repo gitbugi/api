@@ -10,9 +10,6 @@ const Vocabelsroute = require("./routes/vocabels")
 const userroute = require("./routes/user");
 
 app.use(cors({ origin: '*' }))
-app.use(function(req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-});
 app.use(express.json());
 app.use(helmet());
 app.use(compression());
